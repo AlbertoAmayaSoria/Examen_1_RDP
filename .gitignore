@@ -1,0 +1,31 @@
+# Datos descargados desde UCI: nunca se versionan
+data/
+*.csv
+*.xls
+*.xlsx
+*.zip
+
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Bytecode, empaquetado y cachés de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

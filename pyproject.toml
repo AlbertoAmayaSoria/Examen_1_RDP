@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "examen-1-rdp"
+version = "0.1.0"
+description = "Examen 1 de Reconocimiento de Patrones (Universidad de Sonora)"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "numpy==2.5.4",
+    "pandas==3.1.1",
+    "scikit-learn==1.9.1",
+    "scipy==1.18.1",
+    "matplotlib==3.11.2",
+    "xlrd==2.0.2",
+    "openpyxl==3.1.5",
+    "sympy==1.14.0",
+    "jupyter==1.1.1",
+]
+
+[tool.setuptools]
+# El repositorio contiene scripts y notebooks, no un paquete importable.
+packages = []
