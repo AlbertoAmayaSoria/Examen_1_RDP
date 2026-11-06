@@ -20,7 +20,8 @@ Patrones** de la Universidad de Sonora.
 ├── AGENTS.md            # Contexto y reglas de trabajo del examen
 ├── README.md            # Este archivo
 ├── pyproject.toml       # Dependencias con versiones fijas
-├── .gitignore           # Excluye datos, .venv y cachés
+├── environment.yml      # Entorno conda rp-examen (Python 3.14)
+├── .gitignore           # Excluye datos, entornos y cachés
 ├── problema-1/          # Grupos por SEXO, L = 5G, umbral del banco = 1/6
 └── problema-2/          # Variable objetivo: registered
 ```
@@ -30,17 +31,16 @@ desde su fuente original en UCI y los deja en `data/` (ignorado por git).
 
 ## Cómo reproducir todo
 
-Requiere **Python 3.14** (el proyecto fija esa versión mínima en
-`pyproject.toml`).
+El entorno conda `rp-examen` usa **Python 3.14**. Las dependencias fijas viven
+en `pyproject.toml`; `environment.yml` solo aporta Python y la instalación
+editable del proyecto.
 
 ```bash
-# 1. Crear y activar el entorno virtual
-python3 -m venv .venv
-source .venv/bin/activate        # En Windows: .venv\Scripts\activate
+# 1. Crear el entorno conda (solo la primera vez)
+conda env create -f environment.yml
 
-# 2. Actualizar pip e instalar las dependencias fijas
-python -m pip install --upgrade pip
-python -m pip install -e .
+# 2. Activar el entorno
+conda activate rp-examen
 
 # 3. Verificar la instalación
 python -c "import numpy, pandas, sklearn, scipy, matplotlib, xlrd, openpyxl, sympy; print('Dependencias OK')"

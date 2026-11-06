@@ -5,10 +5,11 @@ data/
 *.xlsx
 *.zip
 
-# Entorno virtual
+# Entornos virtuales y conda
 .venv/
 venv/
 env/
+condaenv.*.requirements.txt
 
 # Bytecode, empaquetado y cachés de Python
 __pycache__/

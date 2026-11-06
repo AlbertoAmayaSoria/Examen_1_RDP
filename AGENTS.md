@@ -78,6 +78,10 @@ Si algo del enunciado no está aquí, no lo inventes: pregunta.
 6. **Resumen de 5 líneas después de cada paso.** El alumno debe poder
    defender el trabajo oralmente; cada paso termina con un resumen breve
    (ver plantilla en la sección 8).
+7. **Entorno conda obligatorio.** Ejecutar todo dentro del entorno conda
+   `rp-examen` (`conda activate rp-examen`, o `conda run -n rp-examen
+   python ...`). Nunca crear un `.venv` ni instalar paquetes fuera de
+   `pyproject.toml`.
 
 ---
 
@@ -102,6 +106,7 @@ Estructura del repositorio (la raíz del repo es esta carpeta):
 ├── AGENTS.md
 ├── README.md
 ├── pyproject.toml        # dependencias con versiones fijas
+├── environment.yml       # entorno conda rp-examen (Python 3.14)
 ├── .gitignore
 ├── data/                 # descargas, no versionado
 ├── problema-1/
