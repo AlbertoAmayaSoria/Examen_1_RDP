@@ -21,6 +21,7 @@ Patrones** de la Universidad de Sonora.
 ├── README.md            # Este archivo
 ├── pyproject.toml       # Dependencias con versiones fijas
 ├── environment.yml      # Entorno conda rp-examen (Python 3.14)
+├── common.py            # SEED y parámetros comunes
 ├── .gitignore           # Excluye datos, entornos y cachés
 ├── problema-1/          # Grupos por SEXO, L = 5G, umbral del banco = 1/6
 └── problema-2/          # Variable objetivo: registered
@@ -50,6 +51,16 @@ Para abrir los notebooks o Jupyter Lab:
 
 ```bash
 jupyter lab
+```
+
+## Ejecución por problema
+
+Cada problema tiene un `run_all.sh` que ejecuta sus scripts `.py` y luego sus
+libretas en orden:
+
+```bash
+./problema-1/run_all.sh
+./problema-2/run_all.sh   # por ahora solo muestra un TODO
 ```
 
 ## Reproducibilidad

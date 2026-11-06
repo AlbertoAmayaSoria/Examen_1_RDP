@@ -82,6 +82,16 @@ Si algo del enunciado no está aquí, no lo inventes: pregunta.
    `rp-examen` (`conda activate rp-examen`, o `conda run -n rp-examen
    python ...`). Nunca crear un `.venv` ni instalar paquetes fuera de
    `pyproject.toml`.
+8. **Convención mixta de scripts y libretas.**
+   - Scripts `.py` normales para lo que se ejecuta de una sola pasada y para
+     módulos reutilizables (`data.py`, `kernels.py`, métricas, `SEED`).
+   - Libretas `.ipynb` para exploración, modelado, calibración, intervención
+     y gráficas, con comentarios de qué significa cada tabla o gráfica.
+   - Las libretas importan los módulos `.py`; no duplican funciones.
+   - Las libretas se numeran `01_`, `02_`, ... en orden de ejecución y no
+     dependen de variables de otra libreta. Si necesitan resultados previos,
+     los leen de archivos guardados en `resultados/` (ignorado o no por git,
+     según se indique).
 
 ---
 
@@ -107,11 +117,18 @@ Estructura del repositorio (la raíz del repo es esta carpeta):
 ├── README.md
 ├── pyproject.toml        # dependencias con versiones fijas
 ├── environment.yml       # entorno conda rp-examen (Python 3.14)
+├── common.py             # SEED y parámetros comunes
 ├── .gitignore
 ├── data/                 # descargas, no versionado
 ├── problema-1/
+│   ├── data.py
+│   ├── reportes.py
+│   ├── 01_exploracion.ipynb
+│   ├── 01_exploracion.py
+│   ├── run_all.sh
 │   └── README.md
 └── problema-2/
+    ├── run_all.sh
     └── README.md
 ```
 

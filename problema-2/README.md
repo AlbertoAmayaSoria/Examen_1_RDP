@@ -13,6 +13,19 @@ donde `d` es la **distancia circular**.
 
 Pendiente de implementar.
 
+## Ejecución
+
+Desde la raíz del repositorio, con el entorno conda activado:
+
+```bash
+conda activate rp-examen
+./problema-2/run_all.sh
+```
+
+Por ahora el script solo imprime un `TODO`, porque todavía no hay scripts
+`.py` ni libretas en este problema. Cuando existan, se agregarán en orden de
+ejecución dentro de `run_all.sh`.
+
 ## Puntos por confirmar con el enunciado
 
 - [ ] Dataset UCI exacto y URL/ID de descarga.
