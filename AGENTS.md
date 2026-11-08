@@ -92,6 +92,9 @@ Si algo del enunciado no está aquí, no lo inventes: pregunta.
      dependen de variables de otra libreta. Si necesitan resultados previos,
      los leen de archivos guardados en `resultados/` (ignorado o no por git,
      según se indique).
+9. **Git manual.** Nunca ejecutar `git commit` ni `git push`; el usuario hace
+   los commits a mano. Tampoco ejecutar comandos git que modifiquen el
+   repositorio.
 
 ---
 
@@ -120,11 +123,15 @@ Estructura del repositorio (la raíz del repo es esta carpeta):
 ├── common.py             # SEED y parámetros comunes
 ├── .gitignore
 ├── data/                 # descargas, no versionado
+├── resultados/           # evidencia generada (CSV)
 ├── problema-1/
 │   ├── data.py
 │   ├── reportes.py
+│   ├── evidencia_datos.py
 │   ├── 01_exploracion.ipynb
 │   ├── 01_exploracion.py
+│   ├── 02_decisiones_datos.ipynb
+│   ├── 02_decisiones_datos.py
 │   ├── run_all.sh
 │   └── README.md
 └── problema-2/
