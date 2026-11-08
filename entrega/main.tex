@@ -1,0 +1,46 @@
+% Documento principal del Problema 1 (y del Problema 2, aún no escrito).
+% Compilar con: pdflatex main.tex
+% Los archivos p1_*.tex y declaracion_ia.tex son fragmentos (sin preámbulo)
+% que se incluyen con \input.
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\begin{document}
+
+% --- Portada: datos del examen (primera página) -----------------------------
+\begin{center}
+\textbf{\Large Examen 1 de Reconocimiento de Patrones}\\
+\vspace{0.5cm}
+Nombre: \makebox[8cm]{\hrulefill}\\[6pt]
+Expediente: 223210350\\[6pt]
+$a = 0$, \qquad $b = 5$\\[6pt]
+Semilla aleatoria: 223210350
+\end{center}
+
+\newpage
+
+% --- Problema 1 --------------------------------------------------------------
+\section*{Problema 1}
+\input{p1_teoria}
+\input{p1_bitacora}
+
+\newpage
+\input{p1_memorandum}
+\newpage
+
+% --- Uso de asistentes de IA -------------------------------------------------
+\section*{Uso de asistentes de IA}
+\input{declaracion_ia}
+
+% --- Problema 2 (pendiente: aún no redactado) --------------------------------
+% \section*{Problema 2}
+% \input{p2_teoria}
+% \input{p2_bitacora}
+
+\end{document}

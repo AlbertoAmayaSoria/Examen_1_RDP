@@ -1,0 +1,54 @@
+% Fragmento de entrega (sin preambulo; se compila desde main.tex).
+\begin{center}
+\textbf{\large Memorándum para el consejo del banco: igualdad de trato y
+costo de corregirla}
+\end{center}
+
+El modelo de riesgo que el banco ya usa rechaza créditos con un puntaje de
+riesgo. Cuando se revisa por separado a hombres y mujeres, aparece una
+desigualdad clara: entre los clientes que sí habrían pagado, se rechaza al
+$36.74\%$ de los hombres y al $32.51\%$ de las mujeres. Esa diferencia de
+$4.23$ puntos porcentuales se mantiene al repetir el análisis miles de veces
+con muestras alternativas, por lo que no parece producto de la casualidad. En
+cambio, la diferencia en el porcentaje de incumplidores que se aprueban
+($25.03\%$ en hombres frente a $27.42\%$ en mujeres) sí podría deberse al
+azar, y por eso no debería tratarse como una desigualdad probada. No es un
+problema de intención: con probabilidades bien calibradas, un mismo corte
+aplicado a todos produce resultados distintos cuando las tasas de
+incumplimiento de cada grupo son distintas ($23.30\%$ en hombres y
+$21.34\%$ en mujeres en la muestra de prueba).
+
+La corrección que se propone es ajustar ligeramente el corte según el grupo
+para igualar el porcentaje de rechazos entre quienes pagan. Con un corte de
+$0.19$ para hombres y $0.18$ para mujeres, elegidos solo con datos de
+entrenamiento, la diferencia en rechazos entre quienes pagan baja a $0.95$
+puntos en la muestra de prueba, un valor ya indistinguible del azar. Las
+demás brechas quedan también pequeñas ($0.78$ puntos en incumplidores
+aprobados, $1.61$ en valor predictivo y $1.37$ en tasa de rechazo): con tasas
+base de $23.3\%$ en hombres y $21.3\%$ en mujeres, la imposibilidad teórica
+de igualar todas las medidas a la vez es leve en este caso concreto, y casi
+todas las definiciones de trato justo se cumplen a la vez. Ojo: los intervalos
+de confianza de esas brechas posteriores son anchos (entre $-0.012$ y $0.031$
+para los rechazos de quienes pagan; entre $-0.034$ y $0.049$ para los
+incumplidores aprobados), así que su compatibilidad con cero no prueba que
+las brechas hayan desaparecido, solo que con esta muestra ya no se distinguen
+del ruido. La ganancia pasa
+de $1984$ a $1977$ unidades: la pérdida de $7$ unidades no se distingue de
+cero (IC95\% entre $-100$ y $116$ unidades), así que no se puede afirmar que
+corregir cueste dinero con esta muestra. Otras reglas (igualar la tasa de
+rechazo o el valor predictivo) llegaron incluso a dar ganancias algo mayores
+que la línea base ($+11$ y $+35$ unidades), también dentro del ruido, pero
+dejan desigualdades de errores mayores y por eso no se recomiendan.
+
+Hay compromisos que esta recomendación no elimina. Igualar un tipo de trato
+no iguala todos los demás, aunque en este caso las demás diferencias quedan
+pequeñas. Usar cortes distintos según el sexo es un trato diferenciado
+explícito: necesita fundamento jurídico y de gobierno, no solo eficacia
+técnica. Meter el sexo como dato del modelo tampoco resuelve nada: la
+ganancia subiría unos $35$ unidades (IC95\% entre $-36$ y $100$, dentro del
+ruido), pero la desigualdad entre grupos casi se duplica, y además otras
+variables del expediente permiten adivinar el sexo con una exactitud
+moderada. La recomendación práctica es, por tanto, mantener el modelo sin el
+sexo como entrada, aplicar los cortes ajustados con revisión jurídica, y
+vigilar periódicamente si la igualdad se sostiene.
+

@@ -1,0 +1,223 @@
+% Fragmento de entrega (sin preambulo; se compila desde main.tex).
+\section*{Bitácora de decisiones -- Problema 1}
+
+Cada decisión registra qué se decidió, qué se descartó, por qué y con qué
+evidencia. Las tres primeras decisiones reproducen el texto del usuario sin
+cambios; las tres últimas son propuestas del asistente pendientes de revisión
+del usuario.
+
+\subsection*{Decisión 1 -- Tratamiento de códigos raros}
+
+Texto del usuario, sin cambios:
+\begin{quote}
+``(a) Qué decidí: agrupar los códigos no documentados con la categoría
+``otros'': EDUCATION 0, 5 y 6 pasan a 4, y MARRIAGE 0 pasa a 3.
+
+(b) Alternativas que descarté: eliminar esas filas del entrenamiento, o
+dejarlas como categorías propias (one-hot).
+
+(c) Por qué: con boosting, las tres variantes dan el mismo AUC de
+validación dentro del ruido: agrupar 0.7789, eliminar 0.7780 y
+categorías propias 0.7788, con desviación entre particiones de
+$\approx 0.005$ a $0.006$. Como el AUC no decide, elegí la más simple y la que no
+pierde filas. Descarté eliminar porque quita $\approx 1.3\%$ de los datos sin
+ganancia y cambiaría la población que estoy auditando; descarté las
+categorías propias porque dejan columnas de 14 a 54 filas.
+
+(d) Qué pierdo: al agrupar mezclo códigos que quizá significan cosas
+distintas, y que sean equivalentes a ``otros'' es un supuesto que no
+puedo verificar, porque la documentación de UCI no define esos
+códigos.''
+\end{quote}
+Evidencia: \texttt{02\_decisiones\_datos.ipynb} (secciones 1 y 3) y
+\texttt{resultados/significado\_education.csv},
+\texttt{significado\_marriage.csv} y \texttt{decisiones\_datos.csv}.
+
+\subsection*{Decisión 2 -- Tratamiento de PAY\_0..PAY\_6}
+
+Texto del usuario, sin cambios:
+\begin{quote}
+``(a) Qué decidí: tratar PAY\_0..PAY\_6 de forma distinta según el modelo. En
+boosting las dejo como números tal cual (codificación numérica). En
+regresión logística las separo en indicadores de estado ($-2$, $-1$, $0$)
+más una variable de meses de atraso (valores $\ge 1$).
+
+(b) Alternativas que descarté: en boosting, la codificación por estados más
+meses de atraso; en regresión logística, la codificación numérica.
+
+(c) Por qué: en boosting las dos codificaciones dan el mismo AUC de
+validación dentro del ruido (0.7789 con numérico contra 0.7782 con
+estados, con desviación entre particiones de $\approx 0.006$); los árboles
+pueden cortar en $-2$, $-1$ y $0$ por su cuenta, así que usé la más simple.
+En regresión logística la diferencia sí es real: el AUC pasa de 0.7267
+con numérico a 0.7687 con estados ($+0.042$, con desviaciones de
+$0.003$ a $0.007$), porque $-2$, $-1$ y $0$ son estados distintos y no una
+escala numérica, y la logística los trata como si lo fueran.
+
+(d) Qué pierdo: al usar codificaciones distintas, la comparación entre
+modelos mezcla el efecto del modelo con el de la codificación. Además,
+en boosting acepto que el árbol necesite varios cortes para separar
+códigos que no tienen un orden numérico real, y no sé qué significan
+el 0 y el $-2$ porque la documentación de UCI no los define.''
+\end{quote}
+Evidencia: \texttt{02\_decisiones\_datos.ipynb} (secciones 1, 3 y 4) y
+\texttt{resultados/significado\_pay\_0.csv},
+\texttt{significado\_pay\_2.csv} y \texttt{decisiones\_datos.csv}.
+
+\subsection*{Decisión 3 -- Incluir o excluir SEX}
+
+Texto del usuario, sin cambios:
+\begin{quote}
+``(a) Qué decidí: SEX no entra como variable de entrada en el modelo
+principal. Se conserva aparte, solo como variable de auditoría para
+analizar los resultados por grupo.
+
+(b) Alternativa que descarté: incluir SEX como entrada del modelo.
+
+(c) Por qué: SEX quedó fuera porque la diferencia de AUC con y sin SEX
+($0.00013$) es mucho menor que la variación entre particiones de
+validación cruzada ($\approx 0.006$); no aporta valor predictivo medible, así
+que no justifico usar un atributo protegido. (Con SEX: 0.77891; sin
+SEX: 0.77878, boosting, 5 particiones.)
+
+(d) Qué pierdo: la comparación se hizo solo con boosting, no con regresión
+logística. Que SEX no mejore el AUC no significa que quitarla elimine
+las diferencias entre grupos, porque otras variables pueden funcionar
+como sustitutas; eso lo evalúo en el inciso (e) de la práctica. Además,
+para analizar equidad sigo necesitando saber el grupo de cada persona,
+así que el sexo no desaparece del análisis, solo del modelo.''
+\end{quote}
+Evidencia: \texttt{02\_decisiones\_datos.ipynb} (sección 5) y
+\texttt{resultados/decisiones\_datos.csv}.
+
+\subsection*{Evidencia posterior (07) -- Decisión 3}
+
+Nota agregada por la libreta \texttt{07\_sin\_atributo.ipynb} (mismo split,
+mismos hiperparámetros de 03, misma calibración isotónica global, umbral
+$1/6$). No forma parte del texto textual del usuario. Incluir SEX como
+entrada no elimina las diferencias; las amplía: la brecha de FPR pasa de
+$0.042289$ a $0.082428$ ($+0.040$, IC95\% pareado $[0.031,0.048]$, sin el
+cero); la brecha de FNR pasa de $-0.023922$ a $-0.053067$ ($-0.029$,
+IC95\% pareado $[-0.042,-0.017]$, sin el cero); $\Delta$AUC $=-0.0003$
+($0.779162$ con SEX frente a $0.779463$ sin SEX); y $\Delta$ganancia
+$=+35$ unidades de $G$ ($2019-1984$), IC95\% pareado $[-36,100]$, que sí
+contiene el cero (dentro del ruido). Esto confirma la advertencia del inciso
+(d) del usuario: quitar SEX del modelo no elimina las diferencias entre
+grupos (otras variables predicen SEX con AUC $0.650929$ en CV y $0.649996$
+en prueba), y meterla como entrada las agrava. La decisión de dejar SEX
+fuera del modelo principal se mantiene.
+
+\subsection*{Decisión 4 -- Método de calibración (PROPUESTA DEL ASISTENTE)}
+
+\textbf{Qué decidí:} usar calibración isotónica global, con un único
+calibrador aplicado a todos los solicitantes. No se calibró por grupo.
+
+\textbf{Qué descarté:} sin calibrar, sigmoide global y calibración por grupo.
+La calibración por grupo usaría SEX para calibrar, lo que se aparta de la
+decisión de dejar SEX fuera como variable de auditoría, y fragmentaría el
+entrenamiento.
+
+\textbf{Por qué:} el criterio fue menor log-loss en validación cruzada
+anidada dentro del 70\% (5 particiones externas; dentro de cada una,
+\texttt{CalibratedClassifierCV(cv=5)}). El isotónico obtuvo $0.426337$,
+frente a $0.426558$ del sigmoide y $0.427871$ sin calibrar, y ganó también en
+Brier ($0.133471$) y ECE ($0.004595$). El AUC no se usó para elegir porque la
+calibración busca probabilidades correctas, no reordenar casos.
+
+\textbf{¿Se usó la prueba para elegir?} No. El 30\% de prueba se evaluó una
+sola vez después de la elección, solo como reporte (ECE isotónico en prueba
+$0.012525$).
+
+\textbf{Qué pierdo:} la isotónica es un escalón flexible que puede sobreajustar
+con muestras pequeñas y producir probabilidades repetidas; el sigmoide es más
+estable y suave. Además, un calibrador global garantiza
+$P(Y=1\mid S=s,G=g)\approx s$ solo en promedio: no corrige por sí mismo las
+diferencias de FPR/FNR entre grupos, que deben tratarse a nivel de umbral.
+
+Evidencia: \texttt{04\_calibracion.ipynb} y
+\texttt{resultados/04\_comparacion\_cv.csv},
+\texttt{04\_metricas\_test.csv}, \texttt{04\_metodo\_calibracion.csv} y
+\texttt{04\_tabla\_grupos\_despues.csv}.
+
+\subsection*{Decisión 5 -- Definición de equidad (PROPUESTA DEL ASISTENTE)}
+
+\textbf{Qué decidí:} elegir \textbf{igual FPR} como definición de equidad.
+
+\textbf{Qué descarté:} paridad demográfica, que iguala tasas de rechazo pero
+deja diferencias de errores de $1.76$ y $1.26$ puntos porcentuales en OOF, y
+paridad predictiva, que iguala la PPV pero deja diferencias de FPR de $10.96$
+puntos y de FNR de $-7.51$ en OOF. Igual FNR e igual FPR y FNR no se
+descartaron por malas, sino porque en esta cuadrícula eligen el mismo par que
+igual FPR, así que no cambian el resultado.
+
+\textbf{Por qué:} es la única diferencia entre grupos que el bootstrap de 05
+muestra como real: el intervalo de FPR no contiene el cero
+($0.042289$, IC 95\% $[0.020183,0.064465]$) y el de FNR sí
+($-0.023922$, IC 95\% $[-0.064162,0.015438]$). El banco debería corregir
+primero la disparidad que la evidencia respalda. Además, igual FPR ataca la
+violación más visible del principio de tratar igual a quien paga: rechazar al
+$36.74\%$ de los hombres que no incumplieron frente al $32.51\%$ de las
+mujeres (prueba).
+
+\textbf{Qué pierdo:} al igualar FPR se despriorizan otras definiciones. La
+tolerancia ($0.01$) y la cuadrícula ($0.05$--$0.60$, paso $0.01$) son
+convenciones elegidas para el análisis; otra tolerancia podría dar otro par.
+La igualdad de FPR no garantiza igualdad de FNR o de PPV, y su cumplimiento
+debe vigilarse en carteras nuevas.
+
+Evidencia: \texttt{06\_intervencion.ipynb} y
+\texttt{resultados/06\_comparativa\_definiciones.csv},
+\texttt{06\_pares\_umbrales\_igual\_fpr.csv} y
+\texttt{06\_ganancia\_vs\_diferencia.png}.
+
+\subsection*{Decisión 6 -- Selección de umbrales (PROPUESTA DEL ASISTENTE)}
+
+\textbf{Qué decidí:} usar dos umbrales, $t_H=0.19$ y $t_M=0.18$, elegidos con
+predicciones fuera de muestra (\texttt{cross\_val\_predict}, $cv=5$) sobre el
+70\%. El 30\% de prueba se usó solo para reportar el resultado, sin afinar los
+umbrales.
+
+\textbf{Qué descarté:} mantener el umbral único $1/6$, que conserva una
+diferencia de FPR de $4.23$ puntos porcentuales que el bootstrap de 05 señaló
+como real, y elegir los umbrales sobre la prueba, lo que invalidaría la
+estimación del costo y de la equidad resultante.
+
+\textbf{Por qué:} con igual FPR y tolerancia $0.01$, el par $(0.19,0.18)$ es
+el que maximiza la ganancia OOF entre los factibles ($4697$ unidades de $G$,
+frente a $4745$ de la línea base). En prueba el costo no se distingue de
+cero: pérdida de $7$ unidades de $G$, IC95\% $[-100,116]$ (la magnitud
+puntual es $0.35\%$ de la ganancia base, $0.000778$ por solicitante, pero no
+es distinguible del ruido con esta muestra). Los desempates se resolvieron de
+forma determinista: menor diferencia máxima, luego menor $t_H$ y menor $t_M$.
+
+\textbf{Qué pierdo:} usar umbrales distintos por grupo es una política
+explícita de trato diferenciado por atributo protegido y requiere
+justificación jurídica y de gobernanza; no basta con que sea técnicamente
+barata. Además, el par se eligió en una sola cuadrícula y tolerancia, y su
+estabilidad ante otras tolerancias o carteras nuevas debe vigilarse. La
+intervención no elimina la información de SEX: sigue siendo necesaria para
+auditar y para aplicar el umbral correcto.
+
+Evidencia: \texttt{06\_intervencion.ipynb} y
+\texttt{resultados/06\_umbrales\_elegidos.csv},
+\texttt{06\_top\_pares\_igual\_fpr.csv},
+\texttt{06\_costo\_equidad.csv} y \texttt{06\_bootstrap\_ic95.csv}.
+
+\subsection*{Nota sobre el recuadro (e) de la teoría (PROPUESTA DEL ASISTENTE)}
+
+\textbf{Qué decidí:} el recuadro ``Tú decides'' de
+\texttt{p1\_teoria.tex} (inciso (e)) propone igual FPR con
+$(t_H,t_M)=(0.19,0.18)$, acepta umbrales distintos por grupo con justificación
+y mantiene SEX fuera del modelo principal, en consistencia con la Decisión 3.
+
+\textbf{Por qué:} resume los resultados de \texttt{06\_intervencion.ipynb} y
+\texttt{07\_sin\_atributo.ipynb} (ver Decisiones 5 y 6) y los conecta con la
+imposibilidad del inciso (b); no introduce decisiones nuevas más allá de esas
+dos.
+
+\textbf{Qué pierdo:} el recuadro es una propuesta de redacción y de
+interpretación; el usuario debe revisarlo y defenderlo oralmente antes de
+usarlo como decisión propia.
+
+\textbf{Estado:} PROPUESTA DEL ASISTENTE, pendiente de revisión del usuario.
+

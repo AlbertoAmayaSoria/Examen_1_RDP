@@ -1,0 +1,165 @@
+% Fragmento de entrega (sin preambulo; se compila desde main.tex).
+\section*{Problema 1 -- Teoría de equidad e imposibilidad}
+
+En lo que sigue $Y=1$ significa que el cliente incumplió, $Y=0$ que pagó, y
+$\hat{Y}=1$ que el banco rechazó el crédito. Para un grupo $G=g$ escribimos
+$p_g=P(Y=1\mid G=g)$, $PPV_g=P(Y=1\mid \hat{Y}=1,G=g)$,
+$FPR_g=P(\hat{Y}=1\mid Y=0,G=g)$ y $FNR_g=P(\hat{Y}=0\mid Y=1,G=g)$.
+
+\subsection*{(a) La identidad del FPR}
+
+Escribimos $P(\hat{Y}=1,Y=0)$ de dos formas. Condicionando sobre $Y$,
+\[
+P(\hat{Y}=1,Y=0)=P(\hat{Y}=1\mid Y=0)\,P(Y=0)=FPR\,(1-p).
+\]
+Condicionando sobre $\hat{Y}$,
+\[
+P(\hat{Y}=1,Y=0)=P(Y=0\mid \hat{Y}=1)\,P(\hat{Y}=1)=(1-PPV)\,P(\hat{Y}=1).
+\]
+Análogamente para los incumplidores rechazados,
+\[
+P(\hat{Y}=1,Y=1)=P(\hat{Y}=1\mid Y=1)\,P(Y=1)=(1-FNR)\,p
+  \quad\text{y también}\quad
+  =P(Y=1\mid \hat{Y}=1)\,P(\hat{Y}=1)=PPV\,P(\hat{Y}=1).
+\]
+Dividiendo la primera expresión entre la segunda se cancela $P(\hat{Y}=1)$
+(suponiendo que se rechaza a alguien) y se obtiene
+\[
+FPR=\frac{(1-PPV)\,P(\hat{Y}=1)}{(1-p)}
+    \quad\text{y}\quad
+    (1-FNR)\,p = PPV\,P(\hat{Y}=1),
+\]
+de modo que
+\[
+\;FPR=\frac{p}{1-p}\cdot\frac{1-PPV}{PPV}\cdot(1-FNR)\;
+\]
+La identidad es puramente algebraica: no es una coincidencia empírica, sino
+una consecuencia de usar la misma matriz de confusión. En la práctica sirve
+para verificar que una tabla por grupo es internamente consistente.
+
+\subsection*{(b) Igualar FPR, PPV y FNR es imposible con tasas base distintas}
+
+El enunciado pide comparar dos grupos $A$ y $B$ con $FPR_A=0.30$ y
+$FPR_B=0.175$. Si se quisiera igualar además la PPV y el FNR, la identidad del
+inciso (a) daría un valor requerido de $PPV_B=7/19\approx 0.368$. El caso
+general muestra que eso no puede funcionar cuando las tasas base difieren.
+
+Supongamos que el PPV y el FNR son los mismos en ambos grupos, con
+$p_A\neq p_B$. Igualar el FPR exige
+\[
+\frac{p_A}{1-p_A}\cdot\frac{1-PPV}{PPV}\cdot(1-FNR)
+   =\frac{p_B}{1-p_B}\cdot\frac{1-PPV}{PPV}\cdot(1-FNR).
+\]
+Como $p_A\neq p_B$, los factores $p/(1-p)$ son distintos. Para que la
+igualdad pueda cumplirse debe ser
+\[
+(1-PPV)(1-FNR)=0.
+\]
+Es decir, hay dos únicas salidas: $PPV=1$, que significa que no hay falsos
+positivos (y por tanto $FPR=0$ en ambos grupos), o $FNR=1$, que significa que
+nunca se predice positivo, en cuyo caso la PPV queda indefinida porque no hay
+rechazos. Por eso la frase del enunciado ``no perfecto'' debe leerse como
+``comete falsos positivos'': el teorema no dice que no exista un clasificador
+justo en sentido absoluto, sino que un clasificador con algún falso positivo
+no puede igualar las tres métricas a la vez con tasas base distintas. Vale
+la pena observar por separado el caso $PPV=1$ con $FNR>0$: allí nunca se
+rechaza a un cliente que iba a pagar, pero sí se aprueban algunos que
+incumplen; es un clasificador selectivo en el rechazo, no perfecto. El
+clasificador perfecto es el caso extremo $FPR=FNR=0$ y $PPV=1$, que sí iguala
+todas las métricas trivialmente porque no comete ningún error. Fuera de ese
+caso límite y de los degenerados, la imposibilidad entra en juego.
+
+\subsection*{(c) Calibración y los errores por grupo}
+
+El enunciado plantea dos supuestos: (P1) la calibración por grupo,
+$P(Y=1\mid S=s,G=g)=s$, donde $S$ es el puntaje, y (P2) la ley de
+probabilidad total. Entonces
+\[
+E[S\mid G=g]=E\bigl[E[Y\mid S,G]\mid G=g\bigr]=E[Y\mid G=g]=p_g,
+\]
+porque $E[Y\mid S,G]=P(Y=1\mid S,G)=S$ bajo (P1). Es decir, un puntaje
+calibrado tiene media igual a la tasa base de su grupo: su comprobación
+numérica es una prueba de calibración.
+
+El ejemplo del enunciado toma $p_A=11/25=0.44$ y $p_B=13/50=0.26$, y
+considera rechazar exactamente a quienes tienen $S=0.8$, cuyo PPV es $0.8$
+por calibración. Aplicando la identidad se obtiene
+\[
+FPR_A=\frac{1}{7}\approx 0.143,\qquad
+FNR_A=\frac{3}{11}\approx 0.273,
+\]
+\[
+FPR_B=\frac{1}{37}\approx 0.027,\qquad
+FNR_B=\frac{9}{13}\approx 0.692.
+\]
+Con el criterio FPR sale más perjudicado el grupo $A$, porque se rechaza a
+una fracción mayor de quienes no incumplen; con el criterio FNR sale más
+perjudicado el grupo $B$, porque se aprueba a una fracción mayor de quienes
+sí incumplen. Ninguna de las dos lecturas es la ``correcta'': cada una
+prioriza un tipo de error, y con puntajes calibrados y tasas base distintas
+no pueden coincidir.
+
+\subsection*{(d) Por qué el umbral óptimo es el mismo para todos}
+
+Dar crédito a un cliente con puntaje calibrado $s$ produce una ganancia
+esperada
+\[
+(1-s)G-sL.
+\]
+Esta cantidad es positiva si y solo si $(1-s)G>sL$, es decir, si y solo si
+\[
+s<\frac{G}{G+L}.
+\]
+Con $L=5G$ el umbral es $\frac{G}{G+5G}=1/6$. El umbral no depende del grupo:
+por calibración, $P(Y=1\mid S=s,G=g)=s$ en cada grupo, así que el cálculo
+esperado es el mismo para un hombre y para una mujer con el mismo puntaje.
+Pero por el inciso (b), aplicar el mismo umbral con tasas base distintas
+($p_H\neq p_M$) conduce a FPR y FNR distintas. La ganancia óptima y la
+igualdad de errores son objetivos distintos: el primero sugiere un solo
+umbral, el segundo exige en general umbrales distintos o intervenir de otra
+forma.
+
+\subsection*{(e) Tú decides: definición, umbrales y uso del atributo}
+
+\begin{center}
+\fbox{\parbox{0.93\textwidth}{\textbf{Tú decides.}
+\textbf{Definición elegida:} igualar el FPR, porque es la diferencia entre
+grupos que el bootstrap de 05 distingue del ruido ($0.042289$, IC 95\%
+$[0.020183,0.064465]$, sin el cero), mientras que la diferencia de FNR es
+compatible con cero ($-0.023922$, IC 95\% $[-0.064162,0.015438]$). En la
+cuadrícula $0.05$--$0.60$ con tolerancia $0.01$, el par de máxima ganancia
+fuera de muestra es $(t_H,t_M)=(0.19,0.18)$: igual FNR e igual FPR y FNR
+eligen el mismo par, así que la elección es robusta a esas variantes.
+Paridad demográfica y paridad predictiva se descartan como definición
+principal porque dejan diferencias de errores mayores ($1.76$ y $1.26$ puntos
+en OOF la primera; $10.96$ y $-7.51$ la segunda), aunque en prueba llegaron a
+dar ganancias mayores que la línea base ($+11$ y $+35$ unidades de $G$), ambas
+dentro del ruido. El costo de ser justo no se distingue de cero: pérdida de
+$7$ unidades de $G$, IC95\% $[-100,116]$. Con $p_H=0.233$ y $p_M=0.213$ la
+imposibilidad teórica es leve: con $(0.19,0.18)$ las brechas quedan en FPR
+$0.0095$, FNR $0.0078$, PPV $0.016$ y tasa de rechazo $0.014$, así que casi
+todas las definiciones se cumplen a la vez. Ojo: los IC95\% de esas brechas
+posteriores son anchos (FPR $[-0.012,0.031]$, FNR $[-0.034,0.049]$), así que
+su compatibilidad con cero no prueba que las brechas hayan desaparecido, solo
+que con esta muestra ya no se distinguen del ruido.
+
+\textbf{Umbrales distintos por grupo:} sí se aceptan como intervención
+explícita, con la condición de que se justifiquen y se auditen. El umbral de
+hombres es más alto ($0.19$ contra $0.18$) porque su FPR base era mayor: no
+es una ventaja arbitraria, es la corrección documentada de la disparidad. No
+se usa la prueba para elegirlos: se eligieron con predicciones fuera de
+muestra del 70\% y la prueba solo reporta.
+
+\textbf{¿Usar el sexo como entrada del modelo?} No. El contraste de 07
+reentrenó el mismo boosting con SEX y obtuvo AUC $0.779162$ (prácticamente el
+mismo que $0.779463$ sin SEX), ganancia $2019$ ($+35$, $+1.76\%$), pero
+brecha de FPR $0.082428$ e IC sin cero, y brecha de FNR significativa
+$-0.053067$. Meter el atributo protegido no elimina las diferencias, las
+agrava, y contradice la decisión ya registrada de dejar SEX fuera y usarla
+solo para auditoría. Tampoco basta con quitarlo: otras variables predicen
+SEX con AUC $0.650929$ en CV y $0.649996$ en prueba (AGE y varias PAY\_*
+encabezan la asociación), así que SEX sigue presente en el análisis como
+variable de auditoría y, si se interviene, para aplicar el umbral correcto.
+El modelo principal se mantiene sin SEX.}}
+\end{center}
+
