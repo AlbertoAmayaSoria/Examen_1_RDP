@@ -7,7 +7,7 @@ Patrones** de la Universidad de Sonora.
 
 | Campo | Valor |
 |---|---|
-| Nombre | Alberto Amaya |
+| Nombre | Amaya Soria Angel Alberto |
 | Expediente | `223210350` |
 | `a` | `0` |
 | `b` | `5` |
@@ -22,8 +22,10 @@ Patrones** de la Universidad de Sonora.
 ├── pyproject.toml       # Dependencias con versiones fijas
 ├── environment.yml      # Entorno conda rp-examen (Python 3.14)
 ├── common.py            # SEED y parámetros comunes
+├── run_all.sh           # Ejecuta los dos problemas y compila el PDF
 ├── .gitignore           # Excluye datos, entornos y cachés
-├── resultados/          # Evidencia generada (CSV) al ejecutar las libretas
+├── main.pdf             # Documento final compilado
+├── resultados/          # Evidencia generada (CSV y PNG) al ejecutar las libretas
 ├── problema-1/          # Grupos por SEXO, L = 5G, umbral del banco = 1/6
 └── problema-2/          # Variable objetivo: registered
 ```
@@ -54,14 +56,34 @@ Para abrir los notebooks o Jupyter Lab:
 jupyter lab
 ```
 
+## Ejecución completa
+
+Un solo comando ejecuta todo en el orden correcto: descarga de datos,
+Problema 1, Problema 2 y compilación del PDF.
+
+```bash
+conda activate rp-examen
+./run_all.sh
+```
+
+Opciones: `--skip-p1`, `--skip-p2`, `--skip-pdf` y `--help`.
+
+Si el entorno `rp-examen` no está activo pero `conda` existe, el script se
+re-ejecuta solo dentro de ese entorno. El PDF se compila con `tectonic`,
+`latexmk` o `pdflatex` (en ese orden) y se copia a `main.pdf` en la raíz. Si
+Tectonic está en una ruta no estándar:
+
+```bash
+TECTONIC=/ruta/a/tectonic ./run_all.sh
+```
+
 ## Ejecución por problema
 
-Cada problema tiene un `run_all.sh` que ejecuta sus scripts `.py` y luego sus
-libretas en orden:
+También se puede correr cada problema por separado:
 
 ```bash
 ./problema-1/run_all.sh
-./problema-2/run_all.sh   # por ahora solo muestra un TODO
+./problema-2/run_all.sh
 ```
 
 En el Problema 1, `02_decisiones_datos.ipynb` escribe su evidencia en
@@ -84,6 +106,9 @@ constantes confirmadas (`G = 1`, `L = 5`, `UMBRAL = 1/6`) viven en
 - Toda función aleatoria debe fijar la semilla `223210350`.
 - Los scripts deben correr de principio a fin en un entorno limpio.
 - Las descargas se hacen dentro del código; no se versionan archivos de datos.
+- Los CSV de `resultados/` se regeneran al ejecutar las libretas; por eso hay
+  que correr el flujo completo y en orden. Las figuras PNG sí están
+  versionadas.
 - Cada gráfica debe incluir ejes con nombre, título e interpretación.
 
 Consulta `AGENTS.md` para las reglas completas del examen y

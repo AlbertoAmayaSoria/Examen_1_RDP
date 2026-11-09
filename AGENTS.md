@@ -121,9 +121,11 @@ Estructura del repositorio (la raíz del repo es esta carpeta):
 ├── pyproject.toml        # dependencias con versiones fijas
 ├── environment.yml       # entorno conda rp-examen (Python 3.14)
 ├── common.py             # SEED y parámetros comunes
+├── run_all.sh            # flujo completo: P1 + P2 + PDF
+├── main.pdf              # documento final compilado
 ├── .gitignore
 ├── data/                 # descargas, no versionado
-├── resultados/           # evidencia generada (CSV)
+├── resultados/           # evidencia generada (CSV y PNG)
 ├── problema-1/
 │   ├── data.py
 │   ├── reportes.py
