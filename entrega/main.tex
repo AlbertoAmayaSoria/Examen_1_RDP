@@ -1,7 +1,7 @@
-% Documento principal del Problema 1 (y del Problema 2, aún no escrito).
+% Documento principal de los Problemas 1 y 2.
 % Compilar con: pdflatex main.tex
-% Los archivos p1_*.tex y declaracion_ia.tex son fragmentos (sin preámbulo)
-% que se incluyen con \input.
+% Los archivos p1_*.tex, p2_*.tex y declaracion_ia.tex son fragmentos
+% (sin preámbulo) que se incluyen con \input.
 \documentclass[11pt]{article}
 \usepackage[spanish]{babel}
 \usepackage[T1]{fontenc}
@@ -9,8 +9,13 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{url}
+\urlstyle{tt}
+\Urlmuskip=0mu plus 1mu
 \usepackage{geometry}
 \geometry{margin=2.5cm}
+\setlength{\emergencystretch}{3em}
 \begin{document}
 
 % --- Portada: datos del examen (primera página) -----------------------------
@@ -38,9 +43,9 @@ Semilla aleatoria: 223210350
 \section*{Uso de asistentes de IA}
 \input{declaracion_ia}
 
-% --- Problema 2 (pendiente: aún no redactado) --------------------------------
-% \section*{Problema 2}
-% \input{p2_teoria}
-% \input{p2_bitacora}
+% --- Problema 2 --------------------------------------------------------------
+\section*{Problema 2}
+\input{p2_teoria}
+\input{p2_bitacora}
 
 \end{document}

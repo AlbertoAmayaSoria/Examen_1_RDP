@@ -30,3 +30,7 @@ dist/
 Thumbs.db
 .idea/
 .vscode/
+entrega/*.aux
+entrega/*.log
+entrega/*.out
+entrega/main.pdf

@@ -17,11 +17,10 @@ Condicionando sobre $\hat{Y}$,
 P(\hat{Y}=1,Y=0)=P(Y=0\mid \hat{Y}=1)\,P(\hat{Y}=1)=(1-PPV)\,P(\hat{Y}=1).
 \]
 Análogamente para los incumplidores rechazados,
-\[
-P(\hat{Y}=1,Y=1)=P(\hat{Y}=1\mid Y=1)\,P(Y=1)=(1-FNR)\,p
-  \quad\text{y también}\quad
-  =P(Y=1\mid \hat{Y}=1)\,P(\hat{Y}=1)=PPV\,P(\hat{Y}=1).
-\]
+\begin{align*}
+P(\hat{Y}=1,Y=1)&=P(\hat{Y}=1\mid Y=1)\,P(Y=1)=(1-FNR)\,p\\
+&=P(Y=1\mid \hat{Y}=1)\,P(\hat{Y}=1)=PPV\,P(\hat{Y}=1).
+\end{align*}
 Dividiendo la primera expresión entre la segunda se cancela $P(\hat{Y}=1)$
 (suponiendo que se rechaza a alguien) y se obtiene
 \[

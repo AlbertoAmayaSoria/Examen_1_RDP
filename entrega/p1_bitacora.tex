@@ -29,9 +29,9 @@ distintas, y que sean equivalentes a ``otros'' es un supuesto que no
 puedo verificar, porque la documentación de UCI no define esos
 códigos.''
 \end{quote}
-Evidencia: \texttt{02\_decisiones\_datos.ipynb} (secciones 1 y 3) y
-\texttt{resultados/significado\_education.csv},
-\texttt{significado\_marriage.csv} y \texttt{decisiones\_datos.csv}.
+Evidencia: \path{02_decisiones_datos.ipynb} (secciones 1 y 3) y
+\path{resultados/significado_education.csv},
+\path{significado_marriage.csv} y \path{decisiones_datos.csv}.
 
 \subsection*{Decisión 2 -- Tratamiento de PAY\_0..PAY\_6}
 
@@ -60,9 +60,9 @@ en boosting acepto que el árbol necesite varios cortes para separar
 códigos que no tienen un orden numérico real, y no sé qué significan
 el 0 y el $-2$ porque la documentación de UCI no los define.''
 \end{quote}
-Evidencia: \texttt{02\_decisiones\_datos.ipynb} (secciones 1, 3 y 4) y
-\texttt{resultados/significado\_pay\_0.csv},
-\texttt{significado\_pay\_2.csv} y \texttt{decisiones\_datos.csv}.
+Evidencia: \path{02_decisiones_datos.ipynb} (secciones 1, 3 y 4) y
+\path{resultados/significado_pay_0.csv},
+\path{significado_pay_2.csv} y \path{decisiones_datos.csv}.
 
 \subsection*{Decisión 3 -- Incluir o excluir SEX}
 
@@ -87,12 +87,12 @@ como sustitutas; eso lo evalúo en el inciso (e) de la práctica. Además,
 para analizar equidad sigo necesitando saber el grupo de cada persona,
 así que el sexo no desaparece del análisis, solo del modelo.''
 \end{quote}
-Evidencia: \texttt{02\_decisiones\_datos.ipynb} (sección 5) y
-\texttt{resultados/decisiones\_datos.csv}.
+Evidencia: \path{02_decisiones_datos.ipynb} (sección 5) y
+\path{resultados/decisiones_datos.csv}.
 
 \subsection*{Evidencia posterior (07) -- Decisión 3}
 
-Nota agregada por la libreta \texttt{07\_sin\_atributo.ipynb} (mismo split,
+Nota agregada por la libreta \path{07_sin_atributo.ipynb} (mismo split,
 mismos hiperparámetros de 03, misma calibración isotónica global, umbral
 $1/6$). No forma parte del texto textual del usuario. Incluir SEX como
 entrada no elimina las diferencias; las amplía: la brecha de FPR pasa de
@@ -134,10 +134,10 @@ estable y suave. Además, un calibrador global garantiza
 $P(Y=1\mid S=s,G=g)\approx s$ solo en promedio: no corrige por sí mismo las
 diferencias de FPR/FNR entre grupos, que deben tratarse a nivel de umbral.
 
-Evidencia: \texttt{04\_calibracion.ipynb} y
-\texttt{resultados/04\_comparacion\_cv.csv},
-\texttt{04\_metricas\_test.csv}, \texttt{04\_metodo\_calibracion.csv} y
-\texttt{04\_tabla\_grupos\_despues.csv}.
+Evidencia: \path{04_calibracion.ipynb} y
+\path{resultados/04_comparacion_cv.csv},
+\path{04_metricas_test.csv}, \path{04_metodo_calibracion.csv} y
+\path{04_tabla_grupos_despues.csv}.
 
 \subsection*{Decisión 5 -- Definición de equidad (PROPUESTA DEL ASISTENTE)}
 
@@ -165,15 +165,15 @@ convenciones elegidas para el análisis; otra tolerancia podría dar otro par.
 La igualdad de FPR no garantiza igualdad de FNR o de PPV, y su cumplimiento
 debe vigilarse en carteras nuevas.
 
-Evidencia: \texttt{06\_intervencion.ipynb} y
-\texttt{resultados/06\_comparativa\_definiciones.csv},
-\texttt{06\_pares\_umbrales\_igual\_fpr.csv} y
-\texttt{06\_ganancia\_vs\_diferencia.png}.
+Evidencia: \path{06_intervencion.ipynb} y
+\path{resultados/06_comparativa_definiciones.csv},
+\path{06_pares_umbrales_igual_fpr.csv} y
+\path{06_ganancia_vs_diferencia.png}.
 
 \subsection*{Decisión 6 -- Selección de umbrales (PROPUESTA DEL ASISTENTE)}
 
 \textbf{Qué decidí:} usar dos umbrales, $t_H=0.19$ y $t_M=0.18$, elegidos con
-predicciones fuera de muestra (\texttt{cross\_val\_predict}, $cv=5$) sobre el
+predicciones fuera de muestra (\path{cross_val_predict}, $cv=5$) sobre el
 70\%. El 30\% de prueba se usó solo para reportar el resultado, sin afinar los
 umbrales.
 
@@ -198,20 +198,20 @@ estabilidad ante otras tolerancias o carteras nuevas debe vigilarse. La
 intervención no elimina la información de SEX: sigue siendo necesaria para
 auditar y para aplicar el umbral correcto.
 
-Evidencia: \texttt{06\_intervencion.ipynb} y
-\texttt{resultados/06\_umbrales\_elegidos.csv},
-\texttt{06\_top\_pares\_igual\_fpr.csv},
-\texttt{06\_costo\_equidad.csv} y \texttt{06\_bootstrap\_ic95.csv}.
+Evidencia: \path{06_intervencion.ipynb} y
+\path{resultados/06_umbrales_elegidos.csv},
+\path{06_top_pares_igual_fpr.csv},
+\path{06_costo_equidad.csv} y \path{06_bootstrap_ic95.csv}.
 
 \subsection*{Nota sobre el recuadro (e) de la teoría (PROPUESTA DEL ASISTENTE)}
 
 \textbf{Qué decidí:} el recuadro ``Tú decides'' de
-\texttt{p1\_teoria.tex} (inciso (e)) propone igual FPR con
+\path{p1_teoria.tex} (inciso (e)) propone igual FPR con
 $(t_H,t_M)=(0.19,0.18)$, acepta umbrales distintos por grupo con justificación
 y mantiene SEX fuera del modelo principal, en consistencia con la Decisión 3.
 
-\textbf{Por qué:} resume los resultados de \texttt{06\_intervencion.ipynb} y
-\texttt{07\_sin\_atributo.ipynb} (ver Decisiones 5 y 6) y los conecta con la
+\textbf{Por qué:} resume los resultados de \path{06_intervencion.ipynb} y
+\path{07_sin_atributo.ipynb} (ver Decisiones 5 y 6) y los conecta con la
 imposibilidad del inciso (b); no introduce decisiones nuevas más allá de esas
 dos.
 
