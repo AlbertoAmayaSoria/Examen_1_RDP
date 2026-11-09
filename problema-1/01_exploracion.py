@@ -107,6 +107,5 @@ mostrar_tasa_incumplimiento_por_sexo(df, TARGET)
 # ## Lectura de resultados
 #
 # Con los números anteriores se puede describir la composición de la muestra
-# y comparar la tasa de incumplimiento entre hombres y mujeres. Cualquier
-# decisión sobre códigos raros, imputación o modelado queda pendiente y debe
-# consultarse con el alumno.
+# y comparar la tasa de incumplimiento entre hombres y mujeres. Las decisiones
+# sobre códigos raros, imputación y modelado se toman en las libretas 02 y 03.

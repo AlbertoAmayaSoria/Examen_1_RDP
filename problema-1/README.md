@@ -124,13 +124,13 @@ En `entrega/`:
 `bitacora_notas.md` registra, para cada decisión:
 
 - la evidencia que la sustenta (libreta o archivo, tablas y cifras clave),
-- la respuesta textual del alumno, sin parafrasear ni completar, o marcada
-  como **PROPUESTA DEL ASISTENTE, pendiente de revisión del usuario** cuando
-  la redactó el asistente.
+- la respuesta textual del alumno, sin parafrasear ni completar, o la razón
+  redactada por el asistente y aceptada por el alumno.
 
 Las 3 decisiones de datos tienen respuesta textual del usuario. Las
 decisiones 4 (calibración), 5 (definición de equidad), 6 (umbrales) y el
-recuadro (e) de la teoría son propuestas del asistente pendientes de revisión.
+recuadro (e) de la teoría fueron redactadas por el asistente y aceptadas por
+el alumno.
 
 ## Conclusiones (práctica)
 

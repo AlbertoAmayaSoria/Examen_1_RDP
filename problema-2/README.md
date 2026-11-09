@@ -13,9 +13,9 @@ corto, periodo 24 para `hr` y 7 para `weekday`).
 Implementado: descarga + split temporal, verificación de kernels, decisiones
 con evidencia (ventana expansiva, combinación `(k_hr*k_wd)+k_rbf`, `log1p` +
 RMSLE, von Mises, variables), modelos M1–M4 + HGB + kernels inválidos, y
-evaluación final única en prueba. Las decisiones "Tú decides" fueron tomadas
-por el asistente y marcadas como **PROPUESTA DEL ASISTENTE, pendiente de
-revisión del usuario** en `bitacora_notas.md`.
+evaluación final única en prueba. Las decisiones "Tú decides" fueron
+redactadas por el asistente con evidencia propia y aceptadas por el alumno;
+quedan registradas en `bitacora_notas.md`.
 
 ## Ejecución
 
@@ -69,8 +69,8 @@ NumPy). Semilla en `common.py` (`SEED = 223210350`).
 ## Bitácora de decisiones
 
 `bitacora_notas.md` registra las 6 decisiones (validación, combinación,
-métrica/objetivo, kernel válido, variables, estandarización/HGB), cada una
-marcada como PROPUESTA DEL ASISTENTE.
+métrica/objetivo, kernel válido, variables, estandarización/HGB), con su
+evidencia y su razón.
 
 ## Reproducibilidad
 

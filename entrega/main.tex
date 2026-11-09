@@ -3,7 +3,9 @@
 % Los archivos p1_*.tex, p2_*.tex y declaracion_ia.tex son fragmentos
 % (sin preámbulo) que se incluyen con \input.
 \documentclass[11pt]{article}
-\usepackage[spanish]{babel}
+% es-noshorthands: evita que babel-español active < y > (rompen las
+% flechas de TikZ, p. ej. \draw[->]).
+\usepackage[spanish,es-noshorthands]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
@@ -22,7 +24,7 @@
 \begin{center}
 \textbf{\Large Examen 1 de Reconocimiento de Patrones}\\
 \vspace{0.5cm}
-Nombre: \makebox[8cm]{\hrulefill}\\[6pt]
+Nombre: Amaya Soria Angel Alberto\\[6pt]
 Expediente: 223210350\\[6pt]
 $a = 0$, \qquad $b = 5$\\[6pt]
 Semilla aleatoria: 223210350

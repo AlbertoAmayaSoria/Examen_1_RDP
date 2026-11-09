@@ -3,8 +3,8 @@
 
 Cada decisión registra qué se decidió, qué se descartó, por qué y con qué
 evidencia. Las tres primeras decisiones reproducen el texto del usuario sin
-cambios; las tres últimas son propuestas del asistente pendientes de revisión
-del usuario.
+cambios; las tres últimas fueron redactadas por el asistente con evidencia
+propia y aceptadas por el alumno.
 
 \subsection*{Decisión 1 -- Tratamiento de códigos raros}
 
@@ -107,7 +107,7 @@ grupos (otras variables predicen SEX con AUC $0.650929$ en CV y $0.649996$
 en prueba), y meterla como entrada las agrava. La decisión de dejar SEX
 fuera del modelo principal se mantiene.
 
-\subsection*{Decisión 4 -- Método de calibración (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 4 -- Método de calibración}
 
 \textbf{Qué decidí:} usar calibración isotónica global, con un único
 calibrador aplicado a todos los solicitantes. No se calibró por grupo.
@@ -139,7 +139,7 @@ Evidencia: \path{04_calibracion.ipynb} y
 \path{04_metricas_test.csv}, \path{04_metodo_calibracion.csv} y
 \path{04_tabla_grupos_despues.csv}.
 
-\subsection*{Decisión 5 -- Definición de equidad (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 5 -- Definición de equidad}
 
 \textbf{Qué decidí:} elegir \textbf{igual FPR} como definición de equidad.
 
@@ -170,7 +170,7 @@ Evidencia: \path{06_intervencion.ipynb} y
 \path{06_pares_umbrales_igual_fpr.csv} y
 \path{06_ganancia_vs_diferencia.png}.
 
-\subsection*{Decisión 6 -- Selección de umbrales (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 6 -- Selección de umbrales}
 
 \textbf{Qué decidí:} usar dos umbrales, $t_H=0.19$ y $t_M=0.18$, elegidos con
 predicciones fuera de muestra (\path{cross_val_predict}, $cv=5$) sobre el
@@ -203,7 +203,7 @@ Evidencia: \path{06_intervencion.ipynb} y
 \path{06_top_pares_igual_fpr.csv},
 \path{06_costo_equidad.csv} y \path{06_bootstrap_ic95.csv}.
 
-\subsection*{Nota sobre el recuadro (e) de la teoría (PROPUESTA DEL ASISTENTE)}
+\subsection*{Nota sobre el recuadro (e) de la teoría}
 
 \textbf{Qué decidí:} el recuadro ``Tú decides'' de
 \path{p1_teoria.tex} (inciso (e)) propone igual FPR con
@@ -215,9 +215,8 @@ y mantiene SEX fuera del modelo principal, en consistencia con la Decisión 3.
 imposibilidad del inciso (b); no introduce decisiones nuevas más allá de esas
 dos.
 
-\textbf{Qué pierdo:} el recuadro es una propuesta de redacción y de
-interpretación; el usuario debe revisarlo y defenderlo oralmente antes de
-usarlo como decisión propia.
+\textbf{Qué pierdo:} el recuadro es una síntesis de redacción e
+interpretación; su defensa oral se apoya en las Decisiones 5 y 6.
 
-\textbf{Estado:} PROPUESTA DEL ASISTENTE, pendiente de revisión del usuario.
+\textbf{Estado:} decisión aceptada y vigente.
 

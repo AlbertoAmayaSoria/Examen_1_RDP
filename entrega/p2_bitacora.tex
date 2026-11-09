@@ -2,11 +2,10 @@
 \section*{Bitácora de decisiones -- Problema 2}
 
 Cada decisión registra qué se decidió, qué se descartó, por qué y con qué
-evidencia. Todas fueron tomadas por el asistente con evidencia propia, por la
-excepción autorizada, y se marcan como \textbf{PROPUESTA DEL ASISTENTE,
-pendiente de revisión del usuario}.
+evidencia. Todas fueron redactadas por el asistente con evidencia propia y
+aceptadas por el alumno; quedan como decisiones vigentes del trabajo.
 
-\subsection*{Decisión 1 -- Esquema de validación (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 1 -- Esquema de validación}
 
 \textbf{Qué decidí:} ventana expansiva con 4 particiones sobre la muestra
 ordenada por (dteday, hr), con bloques de 500 horas: entrena 0:1000 y valida
@@ -29,7 +28,7 @@ valida 2011-07-31 a 2011-11-19) y \path{resultados/p2_02_particiones.csv}.
 son independientes (entrenamientos solapados) y no se evalúa extrapolación
 estacional completa porque la muestra termina el 2012-09-30.
 
-\subsection*{Decisión 2 -- Combinación de kernels (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 2 -- Combinación de kernels}
 
 \textbf{Qué decidí:} la combinación \textbf{(iii) $(k_{hr}\cdot k_{wd})+k_{rbf}$},
 con von Mises para hora y día (kappas en rejilla) y RBF para las demás
@@ -52,7 +51,7 @@ validación lo confirma: RMSLE medio (iii) $0.556$ frente a (ii) $0.623$ y
 interacción hora-día; una interacción clima $\times$ hora por bandas podría
 capturar más, a costa de más parámetros.
 
-\subsection*{Decisión 3 -- Objetivo logarítmico y métrica RMSLE (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 3 -- Objetivo logarítmico y métrica RMSLE}
 
 \textbf{Qué decidí:} trabajar con \textbf{$\log 1\mathrm{p}(\texttt{registered})$}
 y elegir modelos por \textbf{RMSLE} (RMSE y MAE se reportan en 04 como
@@ -71,7 +70,7 @@ modelo en crudo. Evidencia: \path{resultados/p2_02_error_por_franja.csv}.
 y al retransformar con $\operatorname{expm1}$ hay sesgo de retransformación
 (la media del log no es el log de la media).
 
-\subsection*{Decisión 4 -- Kernel circular válido elegido (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 4 -- Kernel circular válido elegido}
 
 \textbf{Qué decidí:} \textbf{von Mises} $\exp(\kappa(\cos d-1))$ para
 $hr$ y para $weekday$, con kappas independientes en rejilla $\{1,3\}$ (en 03
@@ -90,7 +89,7 @@ cuatro sin coeficientes negativos) y \path{p2_01_eigenvalores.csv}.
 \textbf{Qué pierdo:} un único $\kappa$ por dimensión no captura formas
 asimétricas intra-día (subida rápida, bajada lenta).
 
-\subsection*{Decisión 5 -- workingday, weathersit y yr (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 5 -- workingday, weathersit y yr}
 
 \textbf{Qué decidí:} sacar \textbf{\texttt{workingday}} de la parte RBF y
 conservar \textbf{\texttt{weathersit}} (ordinal numérico) y
@@ -110,7 +109,7 @@ interanual (117.5 a 194.5). Evidencia: sección 4 de
 \textbf{Qué pierdo:} \texttt{holiday} queda como binaria en RBF, así que el
 efecto de festivos puntuales (Navidad) se captura solo parcialmente.
 
-\subsection*{Decisión 6 -- Estandarización de "otras" y entrada del HGB (PROPUESTA DEL ASISTENTE)}
+\subsection*{Decisión 6 -- Estandarización de "otras" y entrada del HGB}
 
 \textbf{Qué decidí:} estandarizar las "otras" \textbf{una sola vez con la
 muestra completa de 3000 horas} (para que la matriz M4 de 3000$\times$3000 se

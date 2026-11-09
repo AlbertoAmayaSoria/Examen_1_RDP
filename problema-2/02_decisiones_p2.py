@@ -18,8 +18,7 @@
 # # Problema 2 — 02: evidencia para decidir
 #
 # Esta libreta reúne la evidencia para las tres decisiones abiertas del
-# Problema 2 (marcadas como propuestas del asistente en
-# `bitacora_notas.md`, pendientes de revisión del usuario):
+# Problema 2 (registradas en `bitacora_notas.md`):
 #
 # 1. **Esquema de validación:** ventana expansiva sobre la muestra ordenada
 #    por tiempo, con al menos 4 particiones, entrenando siempre con horas

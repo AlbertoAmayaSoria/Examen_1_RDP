@@ -33,7 +33,7 @@
 # - La calibración se ajusta **solo con el 70% de entrenamiento**, con
 #   `CalibratedClassifierCV(cv=5)` dentro de ese 70%.
 # - Se usa **un único calibrador global**. No se calibra por grupo: esa
-#   decisión queda pendiente del alumno.
+#   decisión se registra en la bitácora (Decisión 4).
 # - El 30% de prueba se usa para evaluar y comparar, no para ajustar el
 #   calibrador ni para elegir el método.
 
@@ -788,8 +788,8 @@ plt.show()
 # mejora no es uniforme y el ECE sube un poco. Esto no significa que el
 # calibrador esté mal: significa que un calibrador global no puede corregir de
 # forma óptima dos distribuciones distintas al mismo tiempo. La decisión de
-# calibrar por grupo queda pendiente del alumno; aquí solo se documenta la
-# evidencia. La figura se guardó en `resultados/04_calibracion_grupos.png`.
+# no calibrar por grupo se registra en la bitácora (Decisión 4); aquí solo se
+# documenta la evidencia. La figura se guardó en `resultados/04_calibracion_grupos.png`.
 
 # %% [markdown]
 # ## 7. Guardado de probabilidades calibradas
@@ -865,6 +865,6 @@ print(f"Metadatos del método guardados en: {ruta_metodo}")
 # - Se ajustó un único calibrador global isotónico con el 70% y `cv=5`; en
 #   prueba el ECE bajó a `0.012525`, el Brier a `0.135246` y el log-loss a
 #   `0.430305`.
-# - No se calibró por grupo. Esa decisión queda pendiente del alumno.
+# - No se calibró por grupo (decisión registrada en la bitácora, Decisión 4).
 #
 # Esta libreta no pasa al Problema 2.

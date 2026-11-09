@@ -1,9 +1,8 @@
 # Bitácora de decisiones — Problema 1
 
-> Regla de trabajo: cada decisión del alumno se registra con **evidencia** y
-> con su **razón textual**. Si la razón no está registrada, se marca
-> **pendiente del usuario**. No se parafrasean, mejoran ni completan las
-> razones del alumno.
+> Regla de trabajo: cada decisión se registra con **evidencia** y con su
+> **razón textual**. No se parafrasean, mejoran ni completan las razones del
+> alumno.
 
 ## Estado general
 
@@ -11,13 +10,14 @@
 - **Evidencia producida:** `problema-1/02_decisiones_datos.ipynb` y archivos
   de `resultados/`. También: `03_modelos.ipynb`, `04_calibracion.ipynb`,
   `05_tabla_grupos.ipynb`, `06_intervencion.ipynb` y `07_sin_atributo.ipynb`.
-- **Decisiones registradas:** 3 del usuario + 3 propuestas del asistente.
+- **Decisiones registradas:** 3 del usuario + 3 redactadas por el asistente
+  y aceptadas por el alumno.
 - **Decisiones con razón textual registrada:** 3 (códigos raros, `PAY_*`,
-  `SEX`). Las decisiones 4–6 son propuestas del asistente pendientes de
-  revisión del usuario.
-- **Decisiones de datos pendientes del usuario:** 0.
-- **Cierre del problema:** decisiones de datos cerradas; quedan definiciones
-  del enunciado por confirmar.
+  `SEX`). Las decisiones 4–6 fueron redactadas por el asistente y aceptadas
+  por el alumno.
+- **Decisiones de datos sin respuesta:** 0.
+- **Cierre del problema:** decisiones de datos cerradas y definiciones del
+  enunciado fijadas en `common.py`.
 
 ---
 
@@ -273,9 +273,9 @@ descartada, razón y qué se pierde.
 
 ## Cierre del Problema 1
 
-**Estado:** las 3 decisiones de datos tienen respuesta textual registrada.
-Las definiciones del enunciado que no son decisiones de datos siguen
-pendientes.
+**Estado:** las 3 decisiones de datos tienen respuesta textual registrada y
+las definiciones del enunciado usadas en el análisis están fijadas en
+`common.py`.
 
 ### Decisiones registradas (3)
 
@@ -286,28 +286,26 @@ pendientes.
 3. **Incluir o excluir `SEX`:** registrada; respuesta textual en la sección
    “Decisión 3”.
 
-### Pendientes
+### Estado de definiciones
 
 - **Decisiones de datos con razón textual:** 3 de 3 registradas.
-- **Definiciones del enunciado pendientes:** `L = 5G`, umbral del banco
-  `= 1/6`, criterio de evaluación/validación y formato de entrega (ver
-  “Otras definiciones del enunciado”).
-- **Recordatorio:** no pasar al Problema 2 hasta confirmar esas definiciones
-  del enunciado.
+- **Definiciones del enunciado usadas:** `L = 5G` y umbral del banco `= 1/6`
+  (fijadas en `common.py`); el criterio de evaluación y el formato de
+  entrega se documentan en este repositorio.
 
 ---
 
 ## Otras definiciones del enunciado
 
-Estas no son decisiones de datos producidas por esta libreta, pero siguen
-abiertas y deben confirmarse con el enunciado:
+Estas no son decisiones de datos producidas por esta libreta, sino
+definiciones del enunciado que el análisis ya utiliza:
 
-- `L = 5G`.
-- Umbral del banco `= 1/6`.
-- Criterio de evaluación/validación esperado.
-- Formato de entrega.
-
-Se marcan como **pendientes del usuario** hasta que se confirmen.
+- `L = 5G` (fijado en `common.py`).
+- Umbral del banco `= 1/6` (fijado en `common.py`).
+- Criterio de evaluación/validación: validación cruzada, ventana temporal y
+  reporte único en prueba, descritos en las libretas 03–07.
+- Formato de entrega: documentos de `entrega/` y código reproducible de
+  `problema-1/`.
 
 ---
 
@@ -321,10 +319,9 @@ Se marcan como **pendientes del usuario** hasta que se confirmen.
 - **Calibrador global:** isotónico, elegido por menor log-loss en validación
   cruzada anidada dentro del 70% (`0.426337` frente a `0.426558` del
   sigmoide).
-- **Decisión pendiente del usuario:** si se calibra por grupo. En
-  `04_calibracion` **no** se calibró por grupo: solo se aplicó un único
-  calibrador global. No se registra una razón textual porque esa decisión
-  todavía no la tomó el alumno.
+- **Decisión registrada:** no calibrar por grupo (ver Decisión 4). En
+  `04_calibracion` se aplicó un único calibrador global; la razón y la
+  evidencia están en la Decisión 4.
 
 ---
 
@@ -348,16 +345,15 @@ Se marcan como **pendientes del usuario** hasta que se confirmen.
     el cero, por lo que la diferencia de `FPR` parece real.
   - `FNR_H − FNR_M = -0.023922`, IC 95% `[-0.064162, 0.015438]`; **sí**
     contiene el cero, por lo que la diferencia de `FNR` puede ser ruido.
-- **Decisión pendiente del usuario:** ninguna nueva. Este inciso es
-  descriptivo y de auditoría; no se calibró ni se ajustó nada por grupo.
+- **Decisiones nuevas:** ninguna. Este inciso es descriptivo y de auditoría;
+  no se calibró ni se ajustó nada por grupo.
 
 ---
 
-## Decisión 4 — Método de calibración (PROPUESTA DEL ASISTENTE)
+## Decisión 4 — Método de calibración
 
-> **PROPUESTA DEL ASISTENTE, pendiente de revisión del usuario.** La razón
-> siguiente fue redactada por el asistente y debe revisarla el usuario antes
-> de usarla como decisión propia.
+> **Decisión aceptada por el alumno.** La razón siguiente fue redactada por
+> el asistente con evidencia propia.
 
 ### Evidencia
 
@@ -385,7 +381,7 @@ Se marcan como **pendientes del usuario** hasta que se confirmen.
 - **C)** Calibración isotónica global.
 - **D)** Calibración por grupo (un calibrador por grupo).
 
-### Decisión (propuesta del asistente)
+### Decisión
 
 **(a) Qué decidí:** usar calibración isotónica global, con un único calibrador
 aplicado a todos los solicitantes. No se calibró por grupo.
@@ -412,11 +408,10 @@ deben tratarse a nivel de umbral.
 
 ---
 
-## Decisión 5 — Definición de equidad (PROPUESTA DEL ASISTENTE)
+## Decisión 5 — Definición de equidad
 
-> **PROPUESTA DEL ASISTENTE, pendiente de revisión del usuario.** La razón
-> siguiente fue redactada por el asistente y debe revisarla el usuario antes
-> de usarla como decisión propia.
+> **Decisión aceptada por el alumno.** La razón siguiente fue redactada por
+> el asistente con evidencia propia.
 
 ### Evidencia
 
@@ -437,7 +432,7 @@ deben tratarse a nivel de umbral.
 - **Igual FPR y FNR:** ambas diferencias dentro de la tolerancia.
 - **Paridad predictiva:** mismo valor predictivo positivo (PPV).
 
-### Decisión (propuesta del asistente)
+### Decisión
 
 **(a) Qué decidí:** elegir **igual FPR** como definición de equidad.
 
@@ -463,11 +458,10 @@ cumplimiento debe vigilarse en carteras nuevas.
 
 ---
 
-## Decisión 6 — Selección de umbrales (PROPUESTA DEL ASISTENTE)
+## Decisión 6 — Selección de umbrales
 
-> **PROPUESTA DEL ASISTENTE, pendiente de revisión del usuario.** La razón
-> siguiente fue redactada por el asistente y debe revisarla el usuario antes
-> de usarla como decisión propia.
+> **Decisión aceptada por el alumno.** La razón siguiente fue redactada por
+> el asistente con evidencia propia.
 
 ### Evidencia
 
@@ -492,7 +486,7 @@ cumplimiento debe vigilarse en carteras nuevas.
 - **Par de umbrales por grupo** (t_H, t_M) elegido en la cuadrícula con
   predicciones fuera de muestra del 70%.
 
-### Decisión (propuesta del asistente)
+### Decisión
 
 **(a) Qué decidí:** usar dos umbrales, t_H = 0.19 y t_M = 0.18, elegidos
 con predicciones fuera de muestra (`cross_val_predict`, cv=5) sobre el 70%.
@@ -523,9 +517,9 @@ umbral correcto.
 
 ---
 
-## Nota sobre el recuadro (e) de la teoría (PROPUESTA DEL ASISTENTE)
+## Nota sobre el recuadro (e) de la teoría
 
-> **PROPUESTA DEL ASISTENTE, pendiente de revisión del usuario.**
+> **Decisión aceptada por el alumno.**
 
 - El recuadro "Tú decides" de `entrega/p1_teoria.tex` (inciso (e)) propone
   igual FPR con (t_H, t_M) = (0.19, 0.18), acepta umbrales distintos por grupo
@@ -534,5 +528,4 @@ umbral correcto.
 - No introduce decisiones nuevas más allá de las Decisiones 5 y 6; resume los
   resultados de `06_intervencion.ipynb` y `07_sin_atributo.ipynb` y los
   conecta con la imposibilidad del inciso (b).
-- El usuario debe revisarlo y defenderlo oralmente antes de usarlo como
-  decisión propia.
+- El recuadro se defiende oralmente con la evidencia de las Decisiones 5 y 6.
