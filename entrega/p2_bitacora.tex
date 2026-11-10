@@ -140,3 +140,8 @@ $-45.4$ en la matriz de entrenamiento, sin advertencias de libsvm, y RMSLE
 de validación $0.552$ y $25.45$ (con todos los puntos como vectores de
 soporte en el caso $k_{II}$) frente a $0.439$ del M4 válido: el dual pierde
 convexidad, óptimo global y garantía de convergencia de SMO.
+
+\subsection*{Limitación de la comparación M4 contra HGB}
+En prueba M4 y HGB empatan (RMSLE $0.4576$ y $0.4573$). M4 cambia a la vez el
+kernel circular y la estructura $(k_{hr}\cdot k_{wd})+k_{rbf}$, así que la
+comparación con M1--M3 no aísla cuál de los dos cambios produjo la mejora.

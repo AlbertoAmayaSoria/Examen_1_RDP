@@ -86,8 +86,10 @@ cada sumando $a_n\cos(n(t-t'))$ es el producto interno
 $\varphi_n(t)\cdot\varphi_n(t')$ con $\varphi_n(t)=\sqrt{a_n}\,(\cos nt,\sin nt)$,
 y el término constante $a_0$ es el kernel de $\varphi_0(t)=\sqrt{a_0}$. Así,
 cada sumando es un kernel, las sumas parciales lo son por (P1), y el límite
-puntual de las sumas parciales (la serie de Fourier de $g$, que converge a $g$
-al ser continua) también lo es por (P1). Luego $k$ es un kernel.
+puntual de las sumas parciales también lo es por (P1). La serie converge a $g$
+porque, al ser $g$ continua y $a_n\ge0$, la suma en $t=0$ queda acotada por
+$g(0)$; así $\sum_n a_n<\infty$ y la serie converge uniformemente a $g$.
+Luego $k$ es un kernel.
 
 \textbf{La otra mitad (cómo la usaría).} Si algún $a_n<0$, entonces $k$
 \textbf{no} es un kernel, y hay que exhibir un vector que lo muestre. Se toma el

@@ -52,7 +52,7 @@ NumPy). Semilla en `common.py` (`SEED = 223210350`).
 
 - `kI` y `kII` **no son kernels**: `a_4 ≈ -3.19e-4` (kI), `a_3 ≈ -0.0712`
   (kII); λ_min(24h) = −0.00505 (kI) y −0.839 (kII). Con 7 días, kI parece
-  positivo semidefinido: un conjunto finito pequeño no always detecta la
+  positivo semidefinido: un conjunto finito pequeño no siempre detecta la
   pérdida de semidefinición.
 - Combinación ganadora: `(k_hr * k_wd) + k_rbf` (RMSLE 0.556 frente a 0.623
   y 0.720); validación de ventana expansiva con 4 particiones; objetivo

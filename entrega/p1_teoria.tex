@@ -32,6 +32,12 @@ de modo que
 \[
 \;FPR=\frac{p}{1-p}\cdot\frac{1-PPV}{PPV}\cdot(1-FNR)\;
 \]
+Forma equivalente por conteos: con $P$ positivos reales y $N$ negativos reales,
+\[
+FPR=\frac{FP}{N}=\frac{FP}{TP}\cdot\frac{TP}{P}\cdot\frac{P}{N}
+   =\frac{1-PPV}{PPV}\,(1-FNR)\,\frac{p}{1-p}.
+\]
+
 La identidad es puramente algebraica: no es una coincidencia empírica, sino
 una consecuencia de usar la misma matriz de confusión. En la práctica sirve
 para verificar que una tabla por grupo es internamente consistente.
