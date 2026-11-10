@@ -3,11 +3,16 @@
 % Los archivos p1_*.tex, p2_*.tex y declaracion_ia.tex son fragmentos
 % (sin preámbulo) que se incluyen con \input.
 \documentclass[11pt]{article}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else
+  \usepackage{fontspec}
+\fi
 % es-noshorthands: evita que babel-español active < y > (rompen las
 % flechas de TikZ, p. ej. \draw[->]).
 \usepackage[spanish,es-noshorthands]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -35,10 +40,11 @@ Semilla aleatoria: 223210350
 % --- Problema 1 --------------------------------------------------------------
 \section*{Problema 1}
 \input{p1_teoria}
-\input{p1_bitacora}
 
 \newpage
 \input{p1_memorandum}
+\newpage
+\input{p1_bitacora}
 \newpage
 
 % --- Uso de asistentes de IA -------------------------------------------------
